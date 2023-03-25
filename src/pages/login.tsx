@@ -2,6 +2,7 @@ import { Auth } from '@supabase/auth-ui-react'
 import { ThemeSupa } from '@supabase/auth-ui-shared'
 import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react'
 import { useEffect, useState } from 'react'
+import styles from '../styles/login.module.css'
 
 const LoginPage = () => {
   const supabaseClient = useSupabaseClient()
@@ -20,12 +21,14 @@ const LoginPage = () => {
 
   if (!user)
     return (
-      <Auth
-        redirectTo="http://localhost:3000/"
-        appearance={{ theme: ThemeSupa }}
-        supabaseClient={supabaseClient}
-        socialLayout="horizontal"
-      />
+      <div className={styles.auth}>
+        <Auth
+          redirectTo="http://localhost:3000/"
+          appearance={{ theme: ThemeSupa }}
+          supabaseClient={supabaseClient}
+          providers={[]}
+        />
+      </div>
     )
 
   return (

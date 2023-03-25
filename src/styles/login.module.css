@@ -1,0 +1,9 @@
+.auth {
+  width: 30%;
+  margin: 5%;
+  border: 1px solid darkgray;
+  border-radius: 5px;
+  padding: 1rem;
+  filter: drop-shadow(5px 5px 2px lightgray);
+  background-color: white;
+}
