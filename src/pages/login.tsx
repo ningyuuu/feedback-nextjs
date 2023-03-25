@@ -11,6 +11,7 @@ const LoginPage = () => {
   useEffect(() => {
     async function loadData() {
       const { data } = await supabaseClient.from('test').select('*')
+      console.log({ data })
       setData(data)
     }
     // Only run query once user is logged in.
@@ -23,7 +24,6 @@ const LoginPage = () => {
         redirectTo="http://localhost:3000/"
         appearance={{ theme: ThemeSupa }}
         supabaseClient={supabaseClient}
-        providers={['google']}
         socialLayout="horizontal"
       />
     )
