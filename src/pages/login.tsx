@@ -13,17 +13,12 @@ const LoginPage = () => {
 
   useEffect(() => {
     const redirectIfLoggedIn = async () => {
-      const session = getAuthorization();
-
-      if (session) {
-        try {
-          const res = await fetchGet('/api/users/test', { headers: session})
-          console.log({ res })
-          if (res) {
-            router.push('/')
-          }
-        } catch (err: any) {
+      try {
+        const res = await fetchGet('/api/users/test')
+        if (res) {
+          router.push('/')
         }
+      } catch (err: any) {
       }
     }
 
