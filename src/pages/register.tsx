@@ -1,56 +1,30 @@
-import { getSession, storeSession } from '@/lib/auth';
-import { fetchGet, fetchPost, getAuthorization } from '@/lib/fetch';
-import { useRouter } from 'next/router';
-import { ChangeEvent, FormEventHandler, useEffect, useState } from 'react';
+import { fetchPost } from '@/lib/fetch';
+import { ChangeEvent, FormEventHandler, useState } from 'react';
 import { Container, Form } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button'
 
-const LoginPage = () => {
+const RegistrationPage = () => {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
+  const [reenterPassword, setReenterPassword] = useState('');
 
-  const router = useRouter();
-
-  useEffect(() => {
-    const redirectIfLoggedIn = async () => {
-      const session = getAuthorization();
-
-      if (session) {
-        try {
-          const res = await fetchGet('/api/users/test', { headers: session})
-          console.log({ res })
-          if (res) {
-            router.push('/')
-          }
-        } catch (err: any) {
-        }
-      }
-    }
-
-    redirectIfLoggedIn();
-  }, [router])
-
-  const loginCall = async () => {
-    if (!login) {
+  const register = async () => {
+    if (!password) {
       return
     }
 
-    if (!password) {
+    if (password !== reenterPassword) {
       return
     }
 
     let response;
     try {
-      response = await fetchPost('/api/auth/login', { login, password })
+      response = await fetchPost('/api/users', { login, password })
     } catch (err: any) {
       console.log(err)
     }
 
-    if (response) {
-      console.log({ response })
-      storeSession(response.access_token)
-      location.reload()
-    }
+    console.log({ response })
   }
 
   const updateLogin = (e: ChangeEvent<HTMLInputElement>) => {
@@ -63,9 +37,14 @@ const LoginPage = () => {
     setPassword(target.value)
   }
 
+  const updateReenterPassword = (e: ChangeEvent<HTMLInputElement>) => {
+    const target = e.target
+    setReenterPassword(target.value)
+  }
+
   return (
     <Container>
-      <h1>Login</h1>
+      <h1>Register</h1>
       <Form className="mt-6">
         <Form.Group className='mb-3'>
           <Form.Label>Email address</Form.Label>
@@ -77,12 +56,17 @@ const LoginPage = () => {
           <Form.Control type="password" placeholder="Password" onChange={updatePassword} />
         </Form.Group>
 
-        <Button variant="primary" onClick={loginCall}>
-          Submit
+        <Form.Group className="mb-3" controlId="formReenterPassword">
+          <Form.Label>Reenter Password</Form.Label>
+          <Form.Control type="password" placeholder="Password" onChange={updateReenterPassword} />
+        </Form.Group>
+
+        <Button variant="primary" onClick={register}>
+          Register
         </Button>
       </Form>
     </Container>
   )
 }
 
-export default LoginPage
+export default RegistrationPage
