@@ -5,9 +5,24 @@ import styles from '@/styles/Home.module.css'
 import { Button } from 'react-bootstrap'
 import { removeSession } from '@/lib/auth'
 import { useRouter } from 'next/router'
+import { useEffect } from 'react'
+import { fetchGet } from '@/lib/fetch'
 
 export default function Home() {
   const router = useRouter();
+
+  useEffect(() => {
+    const redirectIfNotLoggedIn = async () => {
+      try {
+        await fetchGet('/api/users/test')
+      } catch (err: any) {
+        router.push('/login')
+      }
+    }
+
+    redirectIfNotLoggedIn();
+  }, [router])
+
   const logout = () => {
     removeSession();
     router.push('/login')

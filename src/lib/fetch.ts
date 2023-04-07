@@ -24,7 +24,6 @@ export const buildOptions = (useAuth: boolean) => {
 
 export const fetchGet = async (url:string, useAuth=true) => {
   const fullUrl = getFullUrl(url)
-  console.log({ opts: buildOptions(useAuth)});
   const res = await fetch(fullUrl, { method: 'GET', headers: buildOptions(useAuth) })
   const json = await res.json()
   if (res.status !== 200) {
