@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import { AppNavBar } from '@/components/UserNavBar'
 import { fetchGet } from '@/lib/fetch'
 import { useEffect, useState } from 'react'
-import { OutstandingProject } from '@/components/OutstandingProject'
+import { Project } from '@/components/Project'
 
 export default function Projects() {
   const [data, setData] = useState<any>([]);
@@ -16,7 +16,7 @@ export default function Projects() {
     })
   }, [])
 
-  const projects = data.map((p: any) => <OutstandingProject data={p} key={p.id} />)
+  const projects = data.map((p: any) => <Project data={p} key={p.id} />)
 
   return (
     <>

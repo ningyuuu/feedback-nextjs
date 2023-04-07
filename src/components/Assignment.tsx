@@ -1,10 +1,9 @@
-import { Script } from "./Script"
+import { Button } from "react-bootstrap"
 
 export const Assignment = ({ data }: any) => {
   return (
     <div className="pt-4">
-      <h4>{data.name}</h4>
-      <div className="d-flex">{data.scripts.map((s: any) => <Script key={s.id} data={s} />)}</div>
+      <h5>{data.name} &nbsp; <Button size="sm" href={`/assignments/${data.id}`}>View</Button></h5>
     </div>
   )
 }

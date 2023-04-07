@@ -1,5 +1,5 @@
 import { Card } from "react-bootstrap"
-import { Assignment } from "./Assignment"
+import { OutstandingAssignment } from "./OutstandingAssignment"
 
 export const OutstandingProject = ({ data }: any) => {
   const scriptCount = data.assignments.reduce((count: number, a: any) => a.scripts.length + count, 0)
@@ -10,7 +10,7 @@ export const OutstandingProject = ({ data }: any) => {
       <Card.Body>
         <h1>{data.name} | {data.period}</h1>
         <div>{data.id} | You have {scriptCount} outstanding scripts in {assignmentCount} assignments.</div>
-        {data.assignments.map((a: any) => <Assignment data={a} key={a.id} />)}
+        {data.assignments.map((a: any) => <OutstandingAssignment data={a} key={a.id} />)}
       </Card.Body>
     </Card>
   )
