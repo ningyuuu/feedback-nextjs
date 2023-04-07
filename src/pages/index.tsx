@@ -1,32 +1,13 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import { Button } from 'react-bootstrap'
 import { removeSession } from '@/lib/auth'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
-import { fetchGet } from '@/lib/fetch'
+import { AppNavBar } from '@/components/UserNavBar'
 
 export default function Home() {
   const router = useRouter();
 
-  useEffect(() => {
-    const redirectIfNotLoggedIn = async () => {
-      try {
-        await fetchGet('/api/users/test')
-      } catch (err: any) {
-        router.push('/login')
-      }
-    }
-
-    redirectIfNotLoggedIn();
-  }, [router])
-
-  const logout = () => {
-    removeSession();
-    router.push('/login')
-  }
   return (
     <>
       <Head>
@@ -35,8 +16,9 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <AppNavBar />
       <main className={styles.main}>
-        <Button onClick={logout}>Logout</Button>
+        <Button onClick={() => {}}>Does nothing</Button>
       </main>
     </>
   )
