@@ -1,13 +1,24 @@
 import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
 import { Button } from 'react-bootstrap'
-import { removeSession } from '@/lib/auth'
 import { useRouter } from 'next/router'
 import { AppNavBar } from '@/components/UserNavBar'
+import { fetchGet } from '@/lib/fetch'
+import { useEffect, useState } from 'react'
+import { Project } from '@/components/Project'
 
 export default function Home() {
   const router = useRouter();
 
+  const [data, setData] = useState<any>([]);
+
+  useEffect(() => {
+    fetchGet('/api/outstanding').then(data => {
+      setData(data);
+    })
+  }, [])
+
+  const projects = data.map((p: any) => <Project data={p} key={p.id} />)
   return (
     <>
       <Head>
@@ -18,6 +29,7 @@ export default function Home() {
       </Head>
       <AppNavBar />
       <main className={styles.main}>
+        {projects}
         <Button onClick={() => {}}>Does nothing</Button>
       </main>
     </>
