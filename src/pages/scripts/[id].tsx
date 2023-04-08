@@ -4,7 +4,7 @@ import { Container } from 'react-bootstrap'
 import { fetchGet } from '@/lib/fetch';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { Workspace } from '@/components/Workspace';
+import { Workspace } from '@/components/workspace/Workspace';
 
 export default function Assignments() {
   const [data, setData] = useState<any>({ assignment: {}, student: {} });
@@ -34,9 +34,7 @@ export default function Assignments() {
       <Container>
         <div className="d-flex flex-column vh-100">
           <div className="mt-4"></div>
-          <h2>{data.student.name} | {data.assignment.name}</h2>
-          <p>View and grade an individual assignment.</p>
-          <Workspace />
+          <Workspace data={data} />
           <div className="mt-5"></div>
         </div>
       </Container>
