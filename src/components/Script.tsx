@@ -12,7 +12,7 @@ export const Script = ({ data, doneStatus=false }: Props) => {
 
   return (
     <div className="me-2">
-      <Button variant={variant} href={`/assignments/${data.id}`}>
+      <Button variant={variant} href={`/scripts/${data.id}`}>
         {data.student.name}
       </Button>
     </div>
