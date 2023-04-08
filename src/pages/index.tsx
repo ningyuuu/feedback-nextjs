@@ -1,10 +1,10 @@
 import Head from 'next/head'
-import styles from '@/styles/Home.module.css'
 import { useRouter } from 'next/router'
 import { AppNavBar } from '@/components/UserNavBar'
 import { fetchGet } from '@/lib/fetch'
 import { useEffect, useState } from 'react'
 import { OutstandingProject } from '@/components/OutstandingProject'
+import { Container } from 'react-bootstrap'
 
 export default function Home() {
   const router = useRouter();
@@ -27,9 +27,10 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <AppNavBar />
-      <main className={styles.main}>
+      <Container>
+        <h1>Home</h1>
         {projects}
-      </main>
+      </Container>
     </>
   )
 }

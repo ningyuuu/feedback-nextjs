@@ -1,10 +1,19 @@
 import { Button } from "react-bootstrap"
 
-export const Script = ({ data }: any) => {
+interface Props {
+  data: any;
+  doneStatus?: boolean;
+}
+
+export const Script = ({ data, doneStatus=false }: Props) => {
+  const variant = doneStatus ?
+    data.scriptGrades.length > 0 ? "success" : "warning"
+    : "light";
+
   return (
-    <div className="me-4">
-      <Button variant="light">
-        <h6>{data.student.name}</h6>
+    <div className="me-2">
+      <Button variant={variant} href={`/assignments/${data.id}`}>
+        {data.student.name}
       </Button>
     </div>
   )

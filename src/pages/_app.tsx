@@ -6,6 +6,6 @@ export default function App({
   pageProps,
 }: AppProps) {
   return (
-      <Component {...pageProps} />
+    <Component {...pageProps} />
   )
 }
