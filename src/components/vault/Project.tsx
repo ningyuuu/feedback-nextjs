@@ -1,15 +1,35 @@
-import { Button, Card } from "react-bootstrap"
-import { VaultAssignment } from "./Assignment"
+import { Button, Card } from "react-bootstrap";
+import { VaultAssignment } from "./Assignment";
 
-export const VaultProject = ({ data }: any) => {
+interface Props {
+  data: any;
+}
 
+export const VaultProject = ({ data }: Props) => {
   return (
     <Card>
       <Card.Body>
-        <h1>{data.name} | {data.period} &nbsp; <Button href={`/projects/${data.id}`}>View</Button></h1>
+        <div className="d-flex">
+          <div className="flex-grow-1">
+            <h1>
+              {data.name} | {data.period}
+            </h1>
+          </div>
+          <div>
+            <Button href={`/projects/${data.id}`}>View project</Button>
+          </div>
+        </div>
+
         <VaultAssignment name="Common" data={data.snippets} />
-        {data.assignments.map((a: any) => <VaultAssignment name={a.name} data={a.snippets} key={a.id} />)}
+        {data.assignments.map((a: any) => (
+          <VaultAssignment
+            name={a.name}
+            data={a.snippets}
+            assignmentId={a.id}
+            key={a.id}
+          />
+        ))}
       </Card.Body>
     </Card>
-  )
-}
+  );
+};

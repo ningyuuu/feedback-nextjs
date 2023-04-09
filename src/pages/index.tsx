@@ -1,23 +1,22 @@
-import Head from 'next/head'
-import { useRouter } from 'next/router'
-import { AppNavBar } from '@/components/UserNavBar'
-import { fetchGet } from '@/lib/fetch'
-import { useEffect, useState } from 'react'
-import { OutstandingProject } from '@/components/outstanding/OutstandingProject'
-import { Container } from 'react-bootstrap'
+import Head from "next/head";
+import { AppNavBar } from "@/components/UserNavBar";
+import { fetchGet } from "@/lib/fetch";
+import { useEffect, useState } from "react";
+import { OutstandingProject } from "@/components/outstanding/OutstandingProject";
+import { Container } from "react-bootstrap";
 
 export default function Home() {
-  const router = useRouter();
-
   const [data, setData] = useState<any>([]);
 
   useEffect(() => {
-    fetchGet('/api/outstanding').then(data => {
+    fetchGet("/api/outstanding").then((data) => {
       setData(data);
-    })
-  }, [])
+    });
+  }, []);
 
-  const projects = data.map((p: any) => <OutstandingProject data={p} key={p.id} />)
+  const projects = data.map((p: any) => (
+    <OutstandingProject data={p} key={p.id} />
+  ));
 
   return (
     <>
@@ -32,5 +31,5 @@ export default function Home() {
         {projects}
       </Container>
     </>
-  )
+  );
 }

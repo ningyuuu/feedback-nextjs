@@ -1,7 +1,7 @@
 import { fetchPost } from "@/lib/fetch";
 import { useRouter } from "next/router";
-import { useEffect, useReducer, useState } from "react";
-import { Modal } from "react-bootstrap"
+import { useEffect, useState } from "react";
+import { Modal } from "react-bootstrap";
 
 interface Props {
   show: boolean;
@@ -11,23 +11,23 @@ interface Props {
 }
 
 export const EditSnippetModal = ({ show, onHide, text, id }: Props) => {
-  const [data, setData] = useState('');
+  const [data, setData] = useState("");
   const router = useRouter();
 
   useEffect(() => {
     setData(text);
-  }, [text])
+  }, [text]);
 
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setData(e.target.value);
-  }
+  };
 
   const save = async () => {
     await fetchPost(`/api/snippets/${id}`, {
-      text: data
-    })
+      text: data,
+    });
     router.reload();
-  }
+  };
 
   return (
     <Modal show={show} onHide={onHide} size="lg" centered>
@@ -36,12 +36,19 @@ export const EditSnippetModal = ({ show, onHide, text, id }: Props) => {
       </Modal.Header>
 
       <Modal.Body>
-        <textarea value={data} onChange={onChange} className="w-100" rows={10} />
+        <textarea
+          value={data}
+          onChange={onChange}
+          className="w-100"
+          rows={10}
+        />
       </Modal.Body>
 
       <Modal.Footer>
-        <button className="btn btn-primary" onClick={save}>Save</button>
+        <button className="btn btn-primary" onClick={save}>
+          Save
+        </button>
       </Modal.Footer>
     </Modal>
-  )
-}
+  );
+};

@@ -1,29 +1,31 @@
-import Head from 'next/head'
-import { AppNavBar } from '@/components/UserNavBar'
-import { Card, Container } from 'react-bootstrap'
-import { fetchGet } from '@/lib/fetch';
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
-import { Script } from '@/components/Script';
+import Head from "next/head";
+import { AppNavBar } from "@/components/UserNavBar";
+import { Card, Container } from "react-bootstrap";
+import { fetchGet } from "@/lib/fetch";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import { Script } from "@/components/Script";
 
 export default function Assignments() {
   const [data, setData] = useState<any>({ scripts: [] });
 
-  const router= useRouter();
+  const router = useRouter();
 
   const { id } = router.query;
 
   useEffect(() => {
     if (id) {
-      fetchGet(`/api/assignments/${id}`).then(data => {
+      fetchGet(`/api/assignments/${id}`).then((data) => {
         setData(data);
-      })
+      });
     }
-  }, [id])
+  }, [id]);
 
-  console.log(data.scripts)
+  console.log(data.scripts);
 
-  const scripts = data.scripts.map((s: any) => <Script key={s.id} data={s} doneStatus />)
+  const scripts = data.scripts.map((s: any) => (
+    <Script key={s.id} data={s} doneStatus />
+  ));
 
   return (
     <>
@@ -49,5 +51,5 @@ export default function Assignments() {
         </Card>
       </Container>
     </>
-  )
+  );
 }

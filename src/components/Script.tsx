@@ -1,13 +1,15 @@
-import { Button } from "react-bootstrap"
+import { Button } from "react-bootstrap";
 
 interface Props {
   data: any;
   doneStatus?: boolean;
 }
 
-export const Script = ({ data, doneStatus=false }: Props) => {
-  const variant = doneStatus ?
-    data.scriptGrades.length > 0 ? "success" : "warning"
+export const Script = ({ data, doneStatus = false }: Props) => {
+  const variant = doneStatus
+    ? data.scriptGrades.length > 0
+      ? "success"
+      : "warning"
     : "light";
 
   return (
@@ -16,5 +18,5 @@ export const Script = ({ data, doneStatus=false }: Props) => {
         {data.student.name}
       </Button>
     </div>
-  )
-}
+  );
+};

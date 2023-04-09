@@ -1,23 +1,20 @@
-import Head from 'next/head'
-import { AppNavBar } from '@/components/UserNavBar'
-import { fetchGet } from '@/lib/fetch'
-import { useEffect, useState } from 'react'
-import { Container } from 'react-bootstrap'
-import { VaultProject } from '@/components/vault/Project'
+import Head from "next/head";
+import { AppNavBar } from "@/components/UserNavBar";
+import { fetchGet } from "@/lib/fetch";
+import { useEffect, useState } from "react";
+import { Container } from "react-bootstrap";
+import { VaultProject } from "@/components/vault/Project";
 
 export default function Home() {
   const [data, setData] = useState<any>([]);
 
   useEffect(() => {
-    console.log('fetch')
-    fetchGet('/api/myvault').then(data => {
+    fetchGet("/api/myvault").then((data) => {
       setData(data);
-    })
-  }, [])
+    });
+  }, []);
 
-  console.log({ data })
-
-  const projects = data.map((p: any) => <VaultProject data={p} key={p.id} />)
+  const projects = data.map((p: any) => <VaultProject data={p} key={p.id} />);
 
   return (
     <>
@@ -32,5 +29,5 @@ export default function Home() {
         {projects}
       </Container>
     </>
-  )
+  );
 }

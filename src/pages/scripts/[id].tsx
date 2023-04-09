@@ -1,27 +1,27 @@
-import Head from 'next/head'
-import { AppNavBar } from '@/components/UserNavBar'
-import { Container } from 'react-bootstrap'
-import { fetchGet } from '@/lib/fetch';
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
-import { Workspace } from '@/components/workspace/Workspace';
+import Head from "next/head";
+import { AppNavBar } from "@/components/UserNavBar";
+import { Container } from "react-bootstrap";
+import { fetchGet } from "@/lib/fetch";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import { Workspace } from "@/components/workspace/Workspace";
 
 export default function Assignments() {
   const [data, setData] = useState<any>({ assignment: {}, student: {} });
 
-  const router= useRouter();
+  const router = useRouter();
 
   const { id } = router.query;
 
   useEffect(() => {
     if (id) {
-      fetchGet(`/api/scripts/${id}`).then(data => {
+      fetchGet(`/api/scripts/${id}`).then((data) => {
         setData(data);
-      })
+      });
     }
-  }, [id])
+  }, [id]);
 
-  console.log({ data })
+  console.log({ data });
 
   return (
     <>
@@ -39,5 +39,5 @@ export default function Assignments() {
         </div>
       </Container>
     </>
-  )
+  );
 }
