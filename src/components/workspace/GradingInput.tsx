@@ -7,12 +7,7 @@ interface Props {
   setData: (string: any) => void;
 }
 
-export const GradingInput = ({
-  data,
-  setData,
-  currGrading,
-  gradings = [],
-}: Props) => {
+export const GradingInput = ({ data, setData, currGrading, gradings = [] }: Props) => {
   const updateText = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setData({
       ...data,
@@ -23,10 +18,7 @@ export const GradingInput = ({
     });
   };
 
-  const currGradingObj =
-    gradings.length > 0
-      ? gradings.filter((g: any) => g.id === currGrading)[0]
-      : null;
+  const currGradingObj = gradings.length > 0 ? gradings.filter((g: any) => g.id === currGrading)[0] : null;
   const gradingName = currGradingObj ? currGradingObj.name : "";
 
   console.log({ currGradingObj });
@@ -53,8 +45,7 @@ export const GradingInput = ({
   return (
     <div className="flex-grow-1 d-flex flex-column">
       <div>
-        {gradingName}:{" "}
-        <input value={data[currGrading]?.grade ?? ""} onChange={updateGrade} />
+        {gradingName}: <input value={data[currGrading]?.grade ?? ""} onChange={updateGrade} />
       </div>
       <textarea
         value={data[currGrading]?.description ?? ""}

@@ -6,6 +6,7 @@ interface Props {
 }
 
 export const VaultProject = ({ data }: Props) => {
+  console.log("v", { data });
   return (
     <Card>
       <Card.Body>
@@ -20,14 +21,9 @@ export const VaultProject = ({ data }: Props) => {
           </div>
         </div>
 
-        <VaultAssignment name="Common" data={data.snippets} />
+        <VaultAssignment name="Common" data={data.snippets} projectId={data.id} />
         {data.assignments.map((a: any) => (
-          <VaultAssignment
-            name={a.name}
-            data={a.snippets}
-            assignmentId={a.id}
-            key={a.id}
-          />
+          <VaultAssignment name={a.name} data={a.snippets} assignmentId={a.id} key={a.id} />
         ))}
       </Card.Body>
     </Card>

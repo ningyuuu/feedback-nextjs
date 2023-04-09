@@ -1,9 +1,7 @@
 import { getSession } from "./auth";
 
 export const getFullUrl = (url: string) => {
-  return process.env.NEXT_PUBLIC_API_URL
-    ? `${process.env.NEXT_PUBLIC_API_URL}${url}`
-    : url;
+  return process.env.NEXT_PUBLIC_API_URL ? `${process.env.NEXT_PUBLIC_API_URL}${url}` : url;
 };
 
 export const getAuthorization = () => {

@@ -14,9 +14,7 @@ export default function Home() {
     });
   }, []);
 
-  const projects = data.map((p: any) => (
-    <OutstandingProject data={p} key={p.id} />
-  ));
+  const projects = data.map((p: any) => <OutstandingProject data={p} key={p.id} />);
 
   return (
     <>

@@ -6,11 +6,7 @@ interface Props {
 }
 
 export const Script = ({ data, doneStatus = false }: Props) => {
-  const variant = doneStatus
-    ? data.scriptGrades.length > 0
-      ? "success"
-      : "warning"
-    : "light";
+  const variant = doneStatus ? (data.scriptGrades.length > 0 ? "success" : "warning") : "light";
 
   return (
     <div className="me-2">

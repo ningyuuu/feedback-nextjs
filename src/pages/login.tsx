@@ -61,20 +61,12 @@ const LoginPage = () => {
       <Form className="mt-6">
         <Form.Group className="mb-3">
           <Form.Label>Email address</Form.Label>
-          <Form.Control
-            type="email"
-            placeholder="Enter email"
-            onChange={updateLogin}
-          />
+          <Form.Control type="email" placeholder="Enter email" onChange={updateLogin} />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Password"
-            onChange={updatePassword}
-          />
+          <Form.Control type="password" placeholder="Password" onChange={updatePassword} />
         </Form.Group>
 
         <Button variant="primary" onClick={loginCall}>

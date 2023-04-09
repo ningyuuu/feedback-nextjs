@@ -20,5 +20,11 @@ module.exports = {
   rules: {
     "no-explicit-any": "off",
     "@typescript-eslint/no-explicit-any": "off",
+    "prettier/prettier": [
+      "error",
+      {
+        printWidth: 120,
+      },
+    ],
   },
 };

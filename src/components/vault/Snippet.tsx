@@ -21,12 +21,7 @@ export const Snippet = ({ data }: Props) => {
         Edit
       </Button>
       <Button size="sm">Delete</Button>
-      <EditSnippetModal
-        show={show}
-        onHide={() => setShow(false)}
-        text={data.text}
-        id={data.id}
-      />
+      <EditSnippetModal show={show} onHide={() => setShow(false)} text={data.text} id={data.id} />
     </div>
   );
 };

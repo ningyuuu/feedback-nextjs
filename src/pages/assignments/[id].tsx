@@ -23,9 +23,7 @@ export default function Assignments() {
 
   console.log(data.scripts);
 
-  const scripts = data.scripts.map((s: any) => (
-    <Script key={s.id} data={s} doneStatus />
-  ));
+  const scripts = data.scripts.map((s: any) => <Script key={s.id} data={s} doneStatus />);
 
   return (
     <>

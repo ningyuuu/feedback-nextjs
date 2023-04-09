@@ -49,20 +49,13 @@ export const Workspace = ({ data }: Props) => {
 
   return (
     <div className="flex-grow-1 d-flex">
-      <iframe
-        src={getFullUrl("/api/scripts/file/1")}
-        height="100%"
-        width="50%"
-      />
+      <iframe src={getFullUrl("/api/scripts/file/1")} height="100%" width="50%" />
       <div className="h-100 w-50 ps-2 d-flex flex-column">
         <h2>
           {student} | {assignment} <Button onClick={postGrading}>Submit</Button>
         </h2>
         <p>View and grade an individual assignment.</p>
-        <Grading
-          data={data.assignment.gradings}
-          setCurrGrading={setCurrGrading}
-        />
+        <Grading data={data.assignment.gradings} setCurrGrading={setCurrGrading} />
         <GradingInput
           gradings={data.assignment.gradings}
           data={gradingData}

@@ -6,8 +6,7 @@ export const Project = ({ data }: any) => {
     <Card>
       <Card.Body>
         <h1>
-          {data.name} | {data.period} &nbsp;{" "}
-          <Button href={`/projects/${data.id}`}>View</Button>
+          {data.name} | {data.period} &nbsp; <Button href={`/projects/${data.id}`}>View</Button>
         </h1>
         {data.assignments.map((a: any) => (
           <Assignment data={a} projectId={data.id} key={a.id} />

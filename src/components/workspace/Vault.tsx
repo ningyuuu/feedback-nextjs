@@ -20,9 +20,7 @@ export const WorkspaceVault = ({ assignmentId }: Props) => {
     });
   }, [assignmentId]);
 
-  const snippets = data.map((s: any) => (
-    <WorkspaceSnippet id={s.id} text={s.text} key={s.id} />
-  ));
+  const snippets = data.map((s: any) => <WorkspaceSnippet id={s.id} text={s.text} key={s.id} />);
 
   return (
     <div className="flex-grow-1">

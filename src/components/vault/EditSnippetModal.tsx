@@ -36,12 +36,7 @@ export const EditSnippetModal = ({ show, onHide, text, id }: Props) => {
       </Modal.Header>
 
       <Modal.Body>
-        <textarea
-          value={data}
-          onChange={onChange}
-          className="w-100"
-          rows={10}
-        />
+        <textarea value={data} onChange={onChange} className="w-100" rows={10} />
       </Modal.Body>
 
       <Modal.Footer>
