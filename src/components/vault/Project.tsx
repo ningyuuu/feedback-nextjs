@@ -6,7 +6,6 @@ interface Props {
 }
 
 export const VaultProject = ({ data }: Props) => {
-  console.log("v", { data });
   return (
     <Card>
       <Card.Body>
