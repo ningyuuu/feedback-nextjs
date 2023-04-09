@@ -1,4 +1,4 @@
-import { Script } from "./Script"
+import { Script } from "../Script"
 
 export const OutstandingAssignment = ({ data }: any) => {
   return (

@@ -1,23 +1,23 @@
 import Head from 'next/head'
-import { useRouter } from 'next/router'
 import { AppNavBar } from '@/components/UserNavBar'
 import { fetchGet } from '@/lib/fetch'
 import { useEffect, useState } from 'react'
-import { OutstandingProject } from '@/components/outstanding/OutstandingProject'
 import { Container } from 'react-bootstrap'
+import { VaultProject } from '@/components/vault/Project'
 
 export default function Home() {
-  const router = useRouter();
-
   const [data, setData] = useState<any>([]);
 
   useEffect(() => {
-    fetchGet('/api/outstanding').then(data => {
+    console.log('fetch')
+    fetchGet('/api/myvault').then(data => {
       setData(data);
     })
   }, [])
 
-  const projects = data.map((p: any) => <OutstandingProject data={p} key={p.id} />)
+  console.log({ data })
+
+  const projects = data.map((p: any) => <VaultProject data={p} key={p.id} />)
 
   return (
     <>
@@ -28,7 +28,7 @@ export default function Home() {
       </Head>
       <AppNavBar />
       <Container>
-        <h1>Home</h1>
+        <h1>Vault</h1>
         {projects}
       </Container>
     </>
