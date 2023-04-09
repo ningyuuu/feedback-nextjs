@@ -3,6 +3,7 @@ import { Grading } from "./Grading";
 import { GradingInput } from "./GradingInput";
 import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
+import { WorkspaceVault } from "./Vault";
 
 interface Props {
   data: any
@@ -53,6 +54,7 @@ export const Workspace = ({ data }: Props) => {
       <p>View and grade an individual assignment.</p>
       <Grading data={data.assignment.gradings} setCurrGrading={setCurrGrading} />
       <GradingInput gradings={data.assignment.gradings} data={gradingData} currGrading={currGrading} setData={setGradingData} />
+      <WorkspaceVault assignmentId={data.assignment.id} />
     </div>
   </div>
 }

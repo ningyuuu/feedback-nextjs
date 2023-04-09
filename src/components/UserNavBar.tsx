@@ -26,7 +26,7 @@ export const AppNavBar = () => {
 
   return  <Navbar bg="dark" variant="dark">
   <Container>
-    <Navbar.Brand href="#home">
+    <Navbar.Brand href="/">
       QuickFeedback
     </Navbar.Brand>
     <Nav className="me-auto">

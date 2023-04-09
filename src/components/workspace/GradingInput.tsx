@@ -44,8 +44,8 @@ export const GradingInput = ({ data, setData, currGrading, gradings=[] }: Props)
   };
 
 
-  return <>
+  return <div className="flex-grow-1 d-flex flex-column">
     <div>{gradingName}: <input value={data[currGrading]?.grade ?? ''} onChange={updateGrade} /></div>
     <textarea value={data[currGrading]?.description ?? ''} className="form-control flex-grow-1" onChange={(e) => updateText(e)}/>
-  </>
+  </div>
 }

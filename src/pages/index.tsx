@@ -27,7 +27,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <AppNavBar />
-      <Container>
+      <Container className="mt-2">
         <h1>Home</h1>
         {projects}
       </Container>
