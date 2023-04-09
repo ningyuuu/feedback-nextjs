@@ -38,7 +38,7 @@ export default function Assignments() {
         <Card className="mt-4">
           <Card.Body>
             <h2>Description</h2>
-            {data.description}
+            <div dangerouslySetInnerHTML={{ __html: data.description }} />
           </Card.Body>
         </Card>
         <Card className="mt-4">

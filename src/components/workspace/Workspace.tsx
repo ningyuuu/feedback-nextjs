@@ -4,6 +4,7 @@ import { GradingInput } from "./GradingInput";
 import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { WorkspaceVault } from "./Vault";
+import { useRouter } from "next/router";
 
 interface Props {
   data: any;
@@ -18,6 +19,8 @@ interface ScriptGrade {
 export const Workspace = ({ data }: Props) => {
   const [currGrading, setCurrGrading] = useState(0);
   const [gradingData, setGradingData] = useState<Record<number, any>>({});
+
+  const router = useRouter();
 
   useEffect(() => {
     if (data.assignment.gradings) {
@@ -41,7 +44,7 @@ export const Workspace = ({ data }: Props) => {
       gradings,
     });
 
-    console.log({ response });
+    router.push("/projects/1");
   };
 
   const student = data.student ? data.student.name : "";

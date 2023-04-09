@@ -17,10 +17,15 @@ export const Snippet = ({ data }: Props) => {
   return (
     <div className="d-flex my-1">
       <div className="flex-grow-1">{data.text}</div>
-      <Button size="sm" className="me-1" onClick={() => setShow(true)}>
-        Edit
-      </Button>
-      <Button size="sm">Delete</Button>
+      <div>
+        <Button size="sm" className="me-1" onClick={() => setShow(true)}>
+          {" "}
+          Edit
+        </Button>
+      </div>
+      <div>
+        <Button size="sm">Delete</Button>
+      </div>
       <EditSnippetModal show={show} onHide={() => setShow(false)} text={data.text} id={data.id} />
     </div>
   );
