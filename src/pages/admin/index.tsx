@@ -28,8 +28,8 @@ export default function Projects() {
   const [selectedData, setSelectedData] = useState<any[]>([]);
 
   useEffect(() => {
-    fetchGet("/api/myprojects").then(() => {
-      setData(defaultData);
+    fetchGet("/api/admin/projects").then((d) => {
+      setData(d);
     });
   }, []);
 
