@@ -1,7 +1,7 @@
 import { ChangeEvent, useEffect } from "react";
 import { useState } from "react";
 import { Button, Table } from "react-bootstrap";
-import { NewProjectModal } from "./NewProjectModal";
+import { NewProjectModal } from "../admin-projects/NewProjectModal";
 
 interface Props {
   data: any[];
@@ -9,7 +9,7 @@ interface Props {
   newProjectAPICall: (data: { name: string; period: string }) => void;
 }
 
-export const AdminProjectsTable = ({ data, setSelectedData, newProjectAPICall }: Props) => {
+export const AdminAssignmentsTable = ({ data, setSelectedData, newProjectAPICall }: Props) => {
   const [selected, setSelected] = useState<boolean[]>([]);
   const [showModal, setShowModal] = useState(false);
 

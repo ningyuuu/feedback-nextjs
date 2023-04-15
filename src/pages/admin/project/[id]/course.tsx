@@ -6,6 +6,7 @@ import { AdminNavBar } from "@/components/AdminNavBar";
 
 import { AdminProjectsTable } from "@/components/admin-projects/Table";
 import { useRouter } from "next/router";
+import { AdminAssignmentsTable } from "@/components/admin-course/AssignmentsTable";
 
 export default function Projects() {
   const router = useRouter();
@@ -34,8 +35,8 @@ export default function Projects() {
       </Head>
       <AdminNavBar />
       <Container className="mt-4">
-        <h2>Admin Home</h2>
-        <AdminProjectsTable data={data} setSelectedData={setSelectedData} newProjectAPICall={newProject} />
+        <h2>Course</h2>
+        <AdminAssignmentsTable data={data} setSelectedData={setSelectedData} newProjectAPICall={newProject} />
       </Container>
     </>
   );
