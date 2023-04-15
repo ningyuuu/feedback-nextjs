@@ -1,31 +1,23 @@
 import Head from "next/head";
 import { Container } from "react-bootstrap";
-import { fetchGet } from "@/lib/fetch";
+import { fetchGet, fetchPost } from "@/lib/fetch";
 import { useEffect, useState } from "react";
 import { AdminNavBar } from "@/components/AdminNavBar";
 
-const defaultData = [
-  {
-    id: 1,
-    name: "Project 1",
-    period: "Fall 2023",
-  },
-  {
-    id: 2,
-    name: "Project 2",
-    period: "Fall 2023",
-  },
-  {
-    id: 3,
-    name: "Project 3",
-    period: "Winter 2023",
-  },
-];
 import { AdminProjectsTable } from "@/components/admin-projects/Table";
+import { useRouter } from "next/router";
 
 export default function Projects() {
+  const router = useRouter();
+
   const [data, setData] = useState<any>([]);
   const [selectedData, setSelectedData] = useState<any[]>([]);
+
+  const newProject = (data: { name: string; period: string }) => {
+    fetchPost("/api/admin/projects", data).then(() => {
+      router.reload();
+    });
+  };
 
   useEffect(() => {
     fetchGet("/api/admin/projects").then((d) => {
@@ -42,7 +34,7 @@ export default function Projects() {
       </Head>
       <AdminNavBar />
       <Container className="mt-4">
-        <AdminProjectsTable data={data} setSelectedData={setSelectedData} />
+        <AdminProjectsTable data={data} setSelectedData={setSelectedData} newProjectAPICall={newProject} />
       </Container>
     </>
   );

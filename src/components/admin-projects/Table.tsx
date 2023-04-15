@@ -1,14 +1,17 @@
 import { ChangeEvent, useEffect } from "react";
 import { useState } from "react";
-import { Table } from "react-bootstrap";
+import { Button, Table } from "react-bootstrap";
+import { NewProjectModal } from "./NewProjectModal";
 
 interface Props {
   data: any[];
   setSelectedData: (data: any[]) => void;
+  newProjectAPICall: (data: { name: string; period: string }) => void;
 }
 
-export const AdminProjectsTable = ({ data, setSelectedData }: Props) => {
+export const AdminProjectsTable = ({ data, setSelectedData, newProjectAPICall }: Props) => {
   const [selected, setSelected] = useState<boolean[]>([]);
+  const [showModal, setShowModal] = useState(false);
 
   const onChange = (e: ChangeEvent<HTMLInputElement>, i: number) => {
     const newSelected = [...selected];
@@ -42,7 +45,15 @@ export const AdminProjectsTable = ({ data, setSelectedData }: Props) => {
           </th>
           <th style={{ width: "38%" }}>Project Name</th>
           <th style={{ width: "20%" }}>Period</th>
-          <th style={{ width: "40%" }}></th>
+          <th style={{ width: "40%" }}>
+            <div className="d-flex w-100">
+              <div className="flex-grow-1"></div>
+              <div className="pe-2">
+                <Button onClick={() => setShowModal(true)}>New</Button>
+                <NewProjectModal show={showModal} onHide={() => setShowModal(false)} save={newProjectAPICall} />
+              </div>
+            </div>
+          </th>
         </tr>
       </thead>
       <tbody>

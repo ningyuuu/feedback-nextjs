@@ -12,7 +12,7 @@ export const NewSnippetModal = ({ show, onHide, text, setText, save }: Props) =>
   return (
     <Modal show={show} onHide={onHide} size="lg" centered>
       <Modal.Header closeButton>
-        <Modal.Title>Edit Snippet</Modal.Title>
+        <Modal.Title>New Snippet</Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
