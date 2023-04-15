@@ -42,9 +42,7 @@ export const AdminProjectsTable = ({ data, setSelectedData }: Props) => {
           </th>
           <th style={{ width: "38%" }}>Project Name</th>
           <th style={{ width: "20%" }}>Period</th>
-          <th colSpan={4} style={{ width: "40%" }}>
-            Edit
-          </th>
+          <th style={{ width: "40%" }}></th>
         </tr>
       </thead>
       <tbody>
@@ -55,10 +53,12 @@ export const AdminProjectsTable = ({ data, setSelectedData }: Props) => {
             </td>
             <td>{d.name}</td>
             <td>{d.period}</td>
-            <td>Course</td>
-            <td>Instructors</td>
-            <td>Students</td>
-            <td>Data</td>
+            <td className="d-flex w-100">
+              <div className="flex-grow-1 text-center">Course</div>
+              <div className="flex-grow-1 text-center">Instructors</div>
+              <div className="flex-grow-1 text-center">Students</div>
+              <div className="flex-grow-1 text-center">Data</div>
+            </td>
           </tr>
         ))}
       </tbody>
