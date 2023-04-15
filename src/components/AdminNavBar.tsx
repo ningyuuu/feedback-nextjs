@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
 
-export const AppNavBar = () => {
+export const AdminNavBar = () => {
   const router = useRouter();
 
   useEffect(() => {
@@ -25,16 +25,11 @@ export const AppNavBar = () => {
   };
 
   return (
-    <Navbar bg="dark" variant="dark">
+    <Navbar bg="success" variant="dark">
       <Container>
-        <Navbar.Brand href="/">QuickFeedback</Navbar.Brand>
+        <Navbar.Brand href="/admin">QuickFeedback - Admin</Navbar.Brand>
         <Nav className="me-auto">
-          <Nav.Link href="/">Home</Nav.Link>
-          <Nav.Link href="/projects">Projects</Nav.Link>
-          <Nav.Link href="/vault">Vault</Nav.Link>
-          <Nav.Link href="/admin" className="ps-4 ms-4">
-            Switch to Admin Mode
-          </Nav.Link>
+          <Nav.Link href="/">Switch to Instructor Mode</Nav.Link>
         </Nav>
         <Nav>
           <Nav.Link onClick={logout}>Logout</Nav.Link>
