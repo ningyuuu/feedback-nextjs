@@ -4,7 +4,6 @@ import { fetchGet, fetchPost } from "@/lib/fetch";
 import { useEffect, useState } from "react";
 import { AdminNavBar } from "@/components/AdminNavBar";
 
-import { AdminProjectsTable } from "@/components/admin-projects/Table";
 import { useRouter } from "next/router";
 import { AdminAssignmentsTable } from "@/components/admin-course/AssignmentsTable";
 
@@ -13,11 +12,19 @@ export default function Courses() {
 
   const projectId = router.query.id;
 
-  const [data, setData] = useState<any>([]);
+  const [data, setData] = useState<any>({});
   const [selectedData, setSelectedData] = useState<any[]>([]);
 
-  const newProject = (data: { name: string; period: string }) => {
-    fetchPost("/api/admin/assignments", data).then(() => {
+  const newAssignment = (data: { name: string }) => {
+    fetchPost(`/api/admin/assignments?project=${projectId}`, data).then(() => {
+      router.reload();
+    });
+  };
+
+  const deleteAssignments = () => {
+    const ids = selectedData.map((sd) => sd.id);
+    console.log("deleted IDs", ids);
+    fetchPost(`/api/admin/assignments/delete`, { ids }).then(() => {
       router.reload();
     });
   };
@@ -40,14 +47,14 @@ export default function Courses() {
       </Head>
       <AdminNavBar />
       <Container className="mt-4">
-        <h2>Edit Course: </h2>
+        <h2>
+          Edit Assignment: {data.name} | {data.period}
+        </h2>
         <AdminAssignmentsTable
-          data={data}
+          data={data.assignments ?? []}
           setSelectedData={setSelectedData}
-          newCourseAPICall={newProject}
-          deleteCourseAPICall={() => {
-            return;
-          }}
+          newAssignmentAPICall={newAssignment}
+          deleteAssignmentAPICall={deleteAssignments}
         />
       </Container>
     </>

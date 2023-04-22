@@ -1,9 +1,9 @@
 import { ChangeEvent, useEffect } from "react";
 import { useState } from "react";
 import { Button, Table } from "react-bootstrap";
-import { NewProjectModal } from "../admin-projects/NewProjectModal";
 import { DeleteConfirmation } from "./DeleteConfirmation";
 import { useRouter } from "next/router";
+import { NewAssignmentModal } from "./NewAssignmentModal";
 
 interface Props {
   data: any[];
@@ -82,7 +82,7 @@ export const AdminAssignmentsTable = ({
           </tr>
         ))}
       </tbody>
-      <NewProjectModal show={showNewModal} onHide={() => setShowNewModal(false)} save={newAssignmentAPICall} />
+      <NewAssignmentModal show={showNewModal} onHide={() => setShowNewModal(false)} save={newAssignmentAPICall} />
       <DeleteConfirmation
         show={showDeleteModal}
         onHide={() => setShowDeleteModal(false)}
