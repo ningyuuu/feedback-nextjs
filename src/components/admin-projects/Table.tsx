@@ -66,7 +66,7 @@ export const AdminProjectsTable = ({ data, setSelectedData, newProjectAPICall }:
             <td>{d.period}</td>
             <td className="d-flex w-100">
               <div className="flex-grow-1 text-center">
-                <a href={`/admin/project/${d.id}/course`}>Course</a>
+                <a href={`/admin/project/${d.id}/assignments`}>Course</a>
               </div>
               <div className="flex-grow-1 text-center">Instructors</div>
               <div className="flex-grow-1 text-center">Students</div>

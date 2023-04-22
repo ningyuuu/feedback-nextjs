@@ -2,16 +2,27 @@ import { ChangeEvent, useEffect } from "react";
 import { useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { NewProjectModal } from "../admin-projects/NewProjectModal";
+import { DeleteConfirmation } from "./DeleteConfirmation";
+import { useRouter } from "next/router";
 
 interface Props {
   data: any[];
   setSelectedData: (data: any[]) => void;
-  newProjectAPICall: (data: { name: string; period: string }) => void;
+  newAssignmentAPICall: (data: { name: string }) => void;
+  deleteAssignmentAPICall: () => void;
 }
 
-export const AdminAssignmentsTable = ({ data, setSelectedData, newProjectAPICall }: Props) => {
+export const AdminAssignmentsTable = ({
+  data,
+  setSelectedData,
+  newAssignmentAPICall,
+  deleteAssignmentAPICall,
+}: Props) => {
+  const router = useRouter();
+  const pid = router.query.id;
   const [selected, setSelected] = useState<boolean[]>([]);
-  const [showModal, setShowModal] = useState(false);
+  const [showNewModal, setShowNewModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const onChange = (e: ChangeEvent<HTMLInputElement>, i: number) => {
     const newSelected = [...selected];
@@ -33,6 +44,7 @@ export const AdminAssignmentsTable = ({ data, setSelectedData, newProjectAPICall
   }, [data, setSelected]);
 
   useEffect(() => {
+    if (data.length === 0) return;
     setSelectedData(data.filter((_, i) => selected[i]));
   }, [selected, data, setSelectedData]);
 
@@ -43,14 +55,15 @@ export const AdminAssignmentsTable = ({ data, setSelectedData, newProjectAPICall
           <th style={{ width: "2%" }}>
             <input type="checkbox" checked={allChecked()} onChange={onAllChange} />
           </th>
-          <th style={{ width: "38%" }}>Project Name</th>
-          <th style={{ width: "20%" }}>Period</th>
-          <th style={{ width: "40%" }}>
+          <th style={{ width: "68%" }}>Assignment</th>
+          <th style={{ width: "30%" }}>
             <div className="d-flex w-100">
               <div className="flex-grow-1"></div>
               <div className="pe-2">
-                <Button onClick={() => setShowModal(true)}>New</Button>
-                <NewProjectModal show={showModal} onHide={() => setShowModal(false)} save={newProjectAPICall} />
+                <Button onClick={() => setShowNewModal(true)}>New</Button>
+                <Button className="mx-2" onClick={() => setShowDeleteModal(true)}>
+                  Delete Selected
+                </Button>
               </div>
             </div>
           </th>
@@ -63,18 +76,18 @@ export const AdminAssignmentsTable = ({ data, setSelectedData, newProjectAPICall
               <input type="checkbox" checked={selected[i]} onChange={(e) => onChange(e, i)} />
             </td>
             <td>{d.name}</td>
-            <td>{d.period}</td>
-            <td className="d-flex w-100">
-              <div className="flex-grow-1 text-center">
-                <a href={`/admin/project/${d.id}/course`}>Course</a>
-              </div>
-              <div className="flex-grow-1 text-center">Instructors</div>
-              <div className="flex-grow-1 text-center">Students</div>
-              <div className="flex-grow-1 text-center">Data</div>
+            <td className="text-right w-100">
+              <a href={`/admin/project/${pid}/assignments/${d.id}`}>Edit Assignment Details</a>
             </td>
           </tr>
         ))}
       </tbody>
+      <NewProjectModal show={showNewModal} onHide={() => setShowNewModal(false)} save={newAssignmentAPICall} />
+      <DeleteConfirmation
+        show={showDeleteModal}
+        onHide={() => setShowDeleteModal(false)}
+        onDelete={deleteAssignmentAPICall}
+      />
     </Table>
   );
 };
