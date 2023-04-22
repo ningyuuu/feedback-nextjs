@@ -2,41 +2,30 @@ import Head from "next/head";
 import { Container } from "react-bootstrap";
 import { fetchGet, fetchPost } from "@/lib/fetch";
 import { useEffect, useState } from "react";
-import { AdminNavBar } from "@/components/AdminNavBar";
+import { AdminNavBar } from "@/components/admin/NavBar";
 
 import { useRouter } from "next/router";
-import { AdminAssignmentsTable } from "@/components/admin-course/AssignmentsTable";
 
 export default function Courses() {
   const router = useRouter();
-
-  const projectId = router.query.id;
+  const { aid } = router.query;
 
   const [data, setData] = useState<any>({});
-  const [selectedData, setSelectedData] = useState<any[]>([]);
 
-  const newAssignment = (data: { name: string }) => {
-    fetchPost(`/api/admin/assignments?project=${projectId}`, data).then(() => {
-      router.reload();
-    });
-  };
-
-  const deleteAssignments = () => {
-    const ids = selectedData.map((sd) => sd.id);
-    console.log("deleted IDs", ids);
-    fetchPost(`/api/admin/assignments/delete`, { ids }).then(() => {
+  const saveAssignment = (data: { description: string }) => {
+    fetchPost(`/api/admin/assignments/${aid}`, data).then(() => {
       router.reload();
     });
   };
 
   useEffect(() => {
-    if (!projectId) return;
+    if (!aid) return;
 
-    fetchGet(`/api/admin/assignments?project=${projectId}`).then((d) => {
+    fetchGet(`/api/admin/assignments/${aid}`).then((d) => {
       setData(d);
       console.log({ d });
     });
-  }, [projectId]);
+  }, [aid]);
 
   return (
     <>
@@ -50,12 +39,6 @@ export default function Courses() {
         <h2>
           Edit Assignment: {data.name} | {data.period}
         </h2>
-        <AdminAssignmentsTable
-          data={data.assignments ?? []}
-          setSelectedData={setSelectedData}
-          newAssignmentAPICall={newAssignment}
-          deleteAssignmentAPICall={deleteAssignments}
-        />
       </Container>
     </>
   );

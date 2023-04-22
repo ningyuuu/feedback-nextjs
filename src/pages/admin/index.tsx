@@ -2,9 +2,9 @@ import Head from "next/head";
 import { Container } from "react-bootstrap";
 import { fetchGet, fetchPost } from "@/lib/fetch";
 import { useEffect, useState } from "react";
-import { AdminNavBar } from "@/components/AdminNavBar";
+import { AdminNavBar } from "@/components/admin/NavBar";
 
-import { AdminProjectsTable } from "@/components/admin-projects/Table";
+import { AdminProjectsTable } from "@/components/admin/project/Table";
 import { useRouter } from "next/router";
 
 export default function Projects() {

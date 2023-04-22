@@ -2,10 +2,10 @@ import Head from "next/head";
 import { Container } from "react-bootstrap";
 import { fetchGet, fetchPost } from "@/lib/fetch";
 import { useEffect, useState } from "react";
-import { AdminNavBar } from "@/components/AdminNavBar";
+import { AdminNavBar } from "@/components/admin/NavBar";
 
 import { useRouter } from "next/router";
-import { AdminAssignmentsTable } from "@/components/admin-course/AssignmentsTable";
+import { AdminAssignmentsTable } from "@/components/admin/course/AssignmentsTable";
 
 export default function Courses() {
   const router = useRouter();
