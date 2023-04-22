@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { AdminNavBar } from "@/components/admin/NavBar";
 
 import { useRouter } from "next/router";
-import { AdminAssignmentsTable } from "@/components/admin/course/AssignmentsTable";
+import { AdminAssignmentsTable } from "@/components/admin/assignment/AssignmentsTable";
 
 export default function Courses() {
   const router = useRouter();

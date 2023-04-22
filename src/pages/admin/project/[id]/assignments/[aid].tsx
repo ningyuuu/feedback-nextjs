@@ -5,15 +5,25 @@ import { useEffect, useState } from "react";
 import { AdminNavBar } from "@/components/admin/NavBar";
 
 import { useRouter } from "next/router";
+import { Description } from "@/components/admin/assignment/Description";
+import { AdminGradingTable } from "@/components/admin/assignment/GradingTable";
 
 export default function Courses() {
   const router = useRouter();
   const { aid } = router.query;
 
   const [data, setData] = useState<any>({});
+  const [selectedData, setSelectedData] = useState<any[]>([]);
 
-  const saveAssignment = (data: { description: string }) => {
-    fetchPost(`/api/admin/assignments/${aid}`, data).then(() => {
+  const createGrading = (data: { name: string; marks: number }) => {
+    fetchPost(`/api/admin/gradings?assignment=${aid}`, data).then(() => {
+      router.reload();
+    });
+  };
+
+  const deleteGradings = () => {
+    const ids = selectedData.map((sd) => sd.id);
+    fetchPost(`/api/admin/gradings/delete`, { ids }).then(() => {
       router.reload();
     });
   };
@@ -21,7 +31,7 @@ export default function Courses() {
   useEffect(() => {
     if (!aid) return;
 
-    fetchGet(`/api/admin/assignments/${aid}`).then((d) => {
+    fetchGet(`/api/admin/gradings?assignment=${aid}`).then((d) => {
       setData(d);
       console.log({ d });
     });
@@ -37,8 +47,15 @@ export default function Courses() {
       <AdminNavBar />
       <Container className="mt-4">
         <h2>
-          Edit Assignment: {data.name} | {data.period}
+          Edit {data.name} | {data.project?.name ?? ""} | {data.project?.period ?? ""}
         </h2>
+        <Description description={data.description} />
+        <AdminGradingTable
+          data={data.gradings ?? []}
+          setSelectedData={setSelectedData}
+          newCall={createGrading}
+          deleteCall={deleteGradings}
+        />
       </Container>
     </>
   );
