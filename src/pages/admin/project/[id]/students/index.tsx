@@ -23,7 +23,6 @@ export default function Courses() {
 
   const deleteStudents = () => {
     const ids = selectedData.map((sd) => sd.id);
-    console.log({ ids });
     fetchPost(`/api/admin/students/delete?project=${projectId}`, { ids }).then(() => {
       router.reload();
     });

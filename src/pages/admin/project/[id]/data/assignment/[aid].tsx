@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { Container } from "react-bootstrap";
-import { fetchGet } from "@/lib/fetch";
+import { fetchGet, fetchPost } from "@/lib/fetch";
 import { useEffect, useState } from "react";
 import { AdminNavBar } from "@/components/admin/NavBar";
 
@@ -15,6 +15,37 @@ export default function Courses() {
   const [data, setData] = useState<any>({});
   const [selectedData, setSelectedData] = useState<any[]>([]);
 
+  const onDelete = () => {
+    const ids = selectedData.map((d) => d.id);
+    fetchPost(`/api/admin/scripts/delete?assignment=${aid}`, { ids }).then(() => {
+      router.reload();
+    });
+  };
+
+  const onReset = () => {
+    const ids = selectedData.map((d) => d.id);
+    fetchPost(`/api/admin/scripts/reset?assignment=${aid}`, { ids }).then(() => {
+      router.reload();
+    });
+  };
+
+  const onAssign = (instructor: number) => {
+    const ids = selectedData.map((d) => d.id);
+    fetchPost(`/api/admin/scripts/assign?assignment=${aid}`, { ids, instructor }).then(() => {
+      router.reload();
+    });
+  };
+
+  const onUpload = (data: { file: File; student: number }) => {
+    const formData = new FormData();
+    formData.append("file", data.file);
+    formData.append("fileName", data.file.name);
+    formData.append("student", data.student.toString());
+    fetchPost(`/api/admin/scripts/upload?assignment=${aid}`, formData).then(() => {
+      router.reload();
+    });
+  };
+
   useEffect(() => {
     if (!aid) return;
 
@@ -23,6 +54,9 @@ export default function Courses() {
       console.log({ d });
     });
   }, [aid]);
+
+  const studentsWithScripts = data.scripts?.map((s: any) => s.student.name) ?? [];
+  const students = data.project?.students?.filter((s: any) => !studentsWithScripts.includes(s.name)) ?? [];
 
   return (
     <>
@@ -34,10 +68,19 @@ export default function Courses() {
       <AdminNavBar />
       <Container className="mt-4">
         <h2>
-          Edit Data: {data.name} | {data.period}
+          Edit Data: {data.project?.name} | {data.project?.period}
         </h2>
         <h3 className="py-2">{data.name}</h3>
-        <ScriptTable data={data.scripts ?? []} setSelectedData={setSelectedData} />
+        <ScriptTable
+          data={data.scripts ?? []}
+          setSelectedData={setSelectedData}
+          onDelete={onDelete}
+          onReset={onReset}
+          onAssign={onAssign}
+          onUpload={onUpload}
+          instructors={data.project?.instructors ?? []}
+          students={students}
+        />
       </Container>
     </>
   );
