@@ -10,10 +10,10 @@ export const DeleteConfirmation = ({ show, onHide, onDelete }: Props) => {
   return (
     <Modal show={show} onHide={onHide} size="lg" centered>
       <Modal.Header closeButton>
-        <Modal.Title>Delete Assignments</Modal.Title>
+        <Modal.Title>Delete Instructors</Modal.Title>
       </Modal.Header>
 
-      <Modal.Body>Are you sure you want to delete selected assignment(s)?</Modal.Body>
+      <Modal.Body>Are you sure you want to delete selected instructors(s)?</Modal.Body>
 
       <Modal.Footer>
         <button className="btn btn-primary" onClick={onDelete}>

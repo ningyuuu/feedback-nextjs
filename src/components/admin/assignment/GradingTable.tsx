@@ -79,12 +79,10 @@ export const AdminGradingTable = ({ data, setSelectedData, newCall, deleteCall }
           <th style={{ width: "20%" }}>
             <div className="d-flex w-100">
               <div className="flex-grow-1"></div>
-              <div className="pe-2">
-                <Button onClick={() => setShowNewModal(true)}>New</Button>
-                <Button className="mx-2" onClick={() => setShowDeleteModal(true)}>
-                  Delete Selected
-                </Button>
-              </div>
+              <Button onClick={() => setShowNewModal(true)}>New</Button>
+              <Button className="mx-2" onClick={() => setShowDeleteModal(true)}>
+                Delete Selected
+              </Button>
             </div>
           </th>
         </tr>
