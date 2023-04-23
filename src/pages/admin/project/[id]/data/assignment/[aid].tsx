@@ -5,25 +5,24 @@ import { useEffect, useState } from "react";
 import { AdminNavBar } from "@/components/admin/NavBar";
 
 import { useRouter } from "next/router";
-import { AdminDataByTable } from "@/components/admin/data/ByAssignmentTable";
+import { ScriptTable } from "@/components/admin/data/ScriptTable";
 
 export default function Courses() {
   const router = useRouter();
 
-  const projectId = router.query.id;
+  const { aid } = router.query;
 
   const [data, setData] = useState<any>({});
+  const [selectedData, setSelectedData] = useState<any[]>([]);
 
   useEffect(() => {
-    if (!projectId) return;
+    if (!aid) return;
 
-    fetchGet(`/api/admin/students?project=${projectId}`).then((d) => {
+    fetchGet(`/api/admin/data/assignment/${aid}`).then((d) => {
       setData(d);
       console.log({ d });
     });
-  }, [projectId]);
-
-  console.log({ data: data.students });
+  }, [aid]);
 
   return (
     <>
@@ -37,9 +36,8 @@ export default function Courses() {
         <h2>
           Edit Data: {data.name} | {data.period}
         </h2>
-        <AdminDataByTable data={data.assignments ?? []} by="assignment" />
-        <AdminDataByTable data={data.instructors ?? []} by="instructor" />
-        <AdminDataByTable data={data.students ?? []} by="student" />
+        <h3 className="py-2">{data.name}</h3>
+        <ScriptTable data={data.scripts ?? []} setSelectedData={setSelectedData} />
       </Container>
     </>
   );
