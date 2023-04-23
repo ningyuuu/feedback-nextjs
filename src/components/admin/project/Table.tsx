@@ -74,7 +74,9 @@ export const AdminProjectsTable = ({ data, setSelectedData, newProjectAPICall }:
               <div className="flex-grow-1 text-center">
                 <a href={`/admin/project/${d.id}/students`}>Students</a>
               </div>
-              <div className="flex-grow-1 text-center">Data</div>
+              <div className="flex-grow-1 text-center">
+                <a href={`/admin/project/${d.id}/data`}>Data</a>
+              </div>
             </td>
           </tr>
         ))}

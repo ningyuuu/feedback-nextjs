@@ -7,7 +7,7 @@ import { AdminNavBar } from "@/components/admin/NavBar";
 import { AdminProjectsTable } from "@/components/admin/project/Table";
 import { useRouter } from "next/router";
 
-export default function Projects() {
+export default function AdminPage() {
   const router = useRouter();
 
   const [data, setData] = useState<any>([]);
