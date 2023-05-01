@@ -30,7 +30,7 @@ export const NewInstructorModal = ({ show, onHide, save, options }: Props) => {
       <Modal.Body>
         <Form>
           <Form.Select onChange={onSelectionChange} value={selection}>
-            {options.map((o) => (
+            {[{ id: 0, name: "" }].concat(options).map((o) => (
               <option key={o.id} value={o.id}>
                 {o.name}
               </option>
