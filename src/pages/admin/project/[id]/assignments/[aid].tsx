@@ -1,11 +1,11 @@
 import Head from "next/head";
-import { Container } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import { fetchGet, fetchPost } from "@/lib/fetch";
 import { useEffect, useState } from "react";
 import { AdminNavBar } from "@/components/admin/NavBar";
 
 import { useRouter } from "next/router";
-import { Description } from "@/components/admin/assignment/Description";
+import { EditableText } from "@/components/admin/assignment/Description";
 import { AdminGradingTable } from "@/components/admin/assignment/GradingTable";
 
 export default function Courses() {
@@ -14,6 +14,9 @@ export default function Courses() {
 
   const [data, setData] = useState<any>({});
   const [selectedData, setSelectedData] = useState<any[]>([]);
+
+  const [name, setName] = useState("");
+  const [desc, setDesc] = useState("");
 
   const createGrading = (data: { name: string; marks: number }) => {
     fetchPost(`/api/admin/gradings?assignment=${aid}`, data).then(() => {
@@ -28,12 +31,19 @@ export default function Courses() {
     });
   };
 
+  const updateAssignment = () => {
+    fetchPost(`/api/admin/assignments/${aid}`, { name, description: desc }).then(() => {
+      router.reload();
+    });
+  };
+
   useEffect(() => {
     if (!aid) return;
 
     fetchGet(`/api/admin/gradings?assignment=${aid}`).then((d) => {
       setData(d);
-      console.log({ d });
+      setName(d.name);
+      setDesc(d.description);
     });
   }, [aid]);
 
@@ -46,10 +56,16 @@ export default function Courses() {
       </Head>
       <AdminNavBar />
       <Container className="mt-4">
-        <h2>
-          Edit {data.name} | {data.project?.name ?? ""} | {data.project?.period ?? ""}
-        </h2>
-        <Description description={data.description} />
+        <div className="d-flex justify-content-between">
+          <h2>
+            Edit {data.name} | {data.project?.name ?? ""} | {data.project?.period ?? ""}
+          </h2>
+          <Button variant="primary" onClick={updateAssignment}>
+            Save
+          </Button>
+        </div>
+        <EditableText text={name} setText={setName} label={"Name"} />
+        <EditableText text={desc} setText={setDesc} label={"Description"} />
         <AdminGradingTable
           data={data.gradings ?? []}
           setSelectedData={setSelectedData}
