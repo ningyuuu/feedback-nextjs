@@ -29,18 +29,19 @@ export const NewScriptModal = ({ show, onHide, save, options }: Props) => {
   return (
     <Modal show={show} onHide={onHide} size="lg" centered>
       <Modal.Header closeButton>
-        <Modal.Title>Assign Instructor</Modal.Title>
+        <Modal.Title>New Script</Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
         <Form>
           <Form.Group controlId="formFile" className="mb-3">
-            <Form.Label>Add more scripts</Form.Label>
-            <Form.Control type="file" onChange={onFileChange} />
+            <Form.Label>Upload Script</Form.Label>
+            <Form.Control type="file" onChange={onFileChange} accept="application/pdf" />
           </Form.Group>
 
+          <Form.Label>Select student</Form.Label>
           <Form.Select onChange={onSelectionChange} value={studentId}>
-            {options.map((o) => (
+            {[{ id: 0, name: "" }].concat(options).map((o) => (
               <option key={o.id} value={o.id}>
                 {o.name}
               </option>

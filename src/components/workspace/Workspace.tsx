@@ -44,7 +44,7 @@ export const Workspace = ({ data }: Props) => {
       gradings: gradings,
     });
 
-    router.push("/projects/1");
+    router.push("/projects/" + data.assignment.project);
   };
 
   const student = data.student ? data.student.name : "";
@@ -52,7 +52,7 @@ export const Workspace = ({ data }: Props) => {
 
   return (
     <div className="flex-grow-1 d-flex">
-      <iframe src={getFullUrl("/api/scripts/file/1")} height="100%" width="50%" />
+      <iframe src={getFullUrl(`/api/scripts/file/${router.query.id}`)} height="100%" width="50%" />
       <div className="h-100 w-50 ps-2 d-flex flex-column">
         <h2>
           {student} | {assignment} <Button onClick={postGrading}>Submit</Button>

@@ -49,3 +49,19 @@ export const fetchPost = async (url: string, body: any, useAuth = true) => {
   }
   return json;
 };
+
+export const fetchPostFile = async (url: string, body: FormData) => {
+  const fullUrl = getFullUrl(url);
+  const res = await fetch(fullUrl, {
+    method: "POST",
+    headers: {
+      Authorization: getAuthorization().Authorization ?? "",
+    },
+    body,
+  });
+  const json = await res.json();
+  if (res.status !== 200 && res.status !== 201) {
+    throw new Error(json.message);
+  }
+  return json;
+};

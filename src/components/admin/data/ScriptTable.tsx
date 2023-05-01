@@ -71,6 +71,8 @@ export const ScriptTable = ({
     setSelectedData(data.filter((_, i) => selected[i]));
   }, [selected, data, setSelectedData]);
 
+  console.log({ data });
+
   return (
     <>
       <div>
@@ -123,7 +125,7 @@ export const ScriptTable = ({
                 <input type="checkbox" checked={selected[i]} onChange={(e) => onChange(e, i)} />
               </td>
               <td>{d.student.name}</td>
-              <td>{d.assignee.name}</td>
+              <td>{d.assignee?.name}</td>
               <td>{d.assignment.name}</td>
               <td>
                 <div className="w-100 d-flex">

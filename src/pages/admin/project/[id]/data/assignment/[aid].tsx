@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { Container } from "react-bootstrap";
-import { fetchGet, fetchPost } from "@/lib/fetch";
+import { fetchGet, fetchPost, fetchPostFile } from "@/lib/fetch";
 import { useEffect, useState } from "react";
 import { AdminNavBar } from "@/components/admin/NavBar";
 
@@ -41,7 +41,7 @@ export default function Courses() {
     formData.append("file", data.file);
     formData.append("fileName", data.file.name);
     formData.append("student", data.student.toString());
-    fetchPost(`/api/admin/scripts/upload?assignment=${aid}`, formData).then(() => {
+    fetchPostFile(`/api/admin/scripts/upload?assignment=${aid}`, formData).then(() => {
       router.reload();
     });
   };
