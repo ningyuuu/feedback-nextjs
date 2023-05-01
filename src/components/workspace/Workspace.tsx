@@ -39,6 +39,11 @@ export const Workspace = ({ data }: Props) => {
       });
     }
 
+    await fetchPost(`/api/scriptgrades/submit`, {
+      scriptId: data.id,
+      gradings: gradings,
+    });
+
     router.push("/projects/1");
   };
 
